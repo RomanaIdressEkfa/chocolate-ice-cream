@@ -1,63 +1,56 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-
-gsap.registerPlugin(ScrollTrigger);
+import { motion } from 'framer-motion';
+import { easeOut, fadeUp, maskLine, stagger } from './motion';
 
 export default function PageHero({ eyebrow, lines, intro }) {
-  const root = useRef(null);
-
-  useEffect(() => {
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-
-    const ctx = gsap.context(() => {
-      gsap
-        .timeline({ defaults: { ease: 'power3.out' } })
-        .from('.page-hero__eyebrow', { y: 24, autoAlpha: 0, duration: 0.8 })
-        .from('.page-hero__line', { yPercent: 112, duration: 1.05, stagger: 0.09 }, 0.1)
-        .from('.page-hero__intro', { y: 28, autoAlpha: 0, duration: 0.9 }, 0.45)
-        .from('.page-hero__chunk', { autoAlpha: 0, scale: 0.86, duration: 1.2, stagger: 0.12 }, 0.2);
-
-      gsap.to('.page-hero__chunk', {
-        yPercent: -26,
-        ease: 'none',
-        scrollTrigger: { trigger: root.current, start: 'top top', end: 'bottom top', scrub: 1 },
-      });
-    }, root);
-
-    return () => ctx.revert();
-  }, []);
-
   return (
-    <section className="page-hero" ref={root}>
-      <img
+    <section className="page-hero">
+      <motion.img
         className="page-hero__chunk page-hero__chunk--left"
         src="/images/ice-cream.png"
         alt=""
         aria-hidden="true"
+        initial={{ opacity: 0, scale: 0.86, x: -70, rotate: -8 }}
+        animate={{ opacity: 0.8, scale: 1, x: 0, rotate: 0 }}
+        transition={{ duration: 1.3, ease: easeOut, delay: 0.15 }}
       />
-      <img
+      <motion.img
         className="page-hero__chunk page-hero__chunk--right"
         src="/images/ice-creamm.png"
         alt=""
         aria-hidden="true"
+        initial={{ opacity: 0, scale: 0.86, x: 70, rotate: 8 }}
+        animate={{ opacity: 0.8, scale: 1, x: 0, rotate: 0 }}
+        transition={{ duration: 1.3, ease: easeOut, delay: 0.25 }}
       />
 
-      <div className="page-hero__inner">
-        <p className="page-hero__eyebrow">{eyebrow}</p>
+      <motion.div
+        className="page-hero__inner"
+        variants={stagger(0.1)}
+        initial="hidden"
+        animate="show"
+      >
+        <motion.p className="page-hero__eyebrow" variants={fadeUp}>
+          {eyebrow}
+        </motion.p>
 
         <h1 className="page-hero__title">
           {lines.map((line) => (
             <span className="page-hero__line-wrap" key={line}>
-              <span className="page-hero__line">{line}</span>
+              <motion.span className="page-hero__line" variants={maskLine}>
+                {line}
+              </motion.span>
             </span>
           ))}
         </h1>
 
-        {intro ? <p className="page-hero__intro">{intro}</p> : null}
-      </div>
+        {intro ? (
+          <motion.p className="page-hero__intro" variants={fadeUp}>
+            {intro}
+          </motion.p>
+        ) : null}
+      </motion.div>
     </section>
   );
 }

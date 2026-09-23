@@ -1,7 +1,7 @@
 'use client';
 
-import { useRef } from 'react';
-import useReveal from './useReveal';
+import { motion } from 'framer-motion';
+import { fadeUp, stagger, viewportOnce } from './motion';
 
 const details = [
   { label: 'Email', value: 'hello@chocolate.com', href: 'mailto:hello@chocolate.com' },
@@ -11,13 +11,16 @@ const details = [
 ];
 
 export default function ContactPanel() {
-  const root = useRef(null);
-  useReveal(root);
-
   return (
-    <section className="contact-page" ref={root}>
+    <section className="contact-page">
       <div className="contact-page__inner">
-        <div className="contact-form-wrap" data-reveal>
+        <motion.div
+          className="contact-form-wrap"
+          variants={stagger(0.08)}
+          initial="hidden"
+          whileInView="show"
+          viewport={viewportOnce}
+        >
           {/* Posts straight to Netlify Forms; no client side handler needed. */}
           <form
             className="contact-form"
@@ -33,54 +36,68 @@ export default function ContactPanel() {
               </label>
             </p>
 
-            <div className="field">
+            <motion.div className="field" variants={fadeUp}>
               <label htmlFor="name">Your name</label>
               <input id="name" name="name" type="text" required autoComplete="name" />
-            </div>
+            </motion.div>
 
-            <div className="field">
+            <motion.div className="field" variants={fadeUp}>
               <label htmlFor="email">Email</label>
               <input id="email" name="email" type="email" required autoComplete="email" />
-            </div>
+            </motion.div>
 
-            <div className="field">
+            <motion.div className="field" variants={fadeUp}>
               <label htmlFor="subject">What is it about</label>
               <select id="subject" name="subject" defaultValue="An order">
                 <option>An order</option>
                 <option>Wholesale</option>
                 <option>Something else</option>
               </select>
-            </div>
+            </motion.div>
 
-            <div className="field">
+            <motion.div className="field" variants={fadeUp}>
               <label htmlFor="message">Message</label>
               <textarea id="message" name="message" rows="5" required />
-            </div>
+            </motion.div>
 
-            <button className="contact-form__submit" type="submit">
+            <motion.button
+              className="contact-form__submit"
+              type="submit"
+              variants={fadeUp}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.97 }}
+            >
               Send it over
-            </button>
+            </motion.button>
           </form>
-        </div>
+        </motion.div>
 
-        <aside className="contact-details" data-reveal>
-          <p className="section-eyebrow">Find us</p>
+        <motion.aside
+          className="contact-details"
+          variants={stagger(0.1)}
+          initial="hidden"
+          whileInView="show"
+          viewport={viewportOnce}
+        >
+          <motion.p className="section-eyebrow" variants={fadeUp}>
+            Find us
+          </motion.p>
 
           <dl className="contact-details__list">
             {details.map(({ label, value, href }) => (
-              <div className="contact-details__row" key={label}>
+              <motion.div className="contact-details__row" key={label} variants={fadeUp}>
                 <dt>{label}</dt>
                 <dd>{href ? <a href={href}>{value}</a> : value}</dd>
-              </div>
+              </motion.div>
             ))}
           </dl>
 
-          <p className="contact-details__note">
+          <motion.p className="contact-details__note" variants={fadeUp}>
             Wholesale and press enquiries are answered within two working days. For an
             order already on its way, reply to your confirmation email and it will reach
             the right person faster.
-          </p>
-        </aside>
+          </motion.p>
+        </motion.aside>
       </div>
     </section>
   );

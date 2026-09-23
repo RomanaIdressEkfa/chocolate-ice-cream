@@ -1,8 +1,9 @@
 'use client';
 
 import { useRef } from 'react';
-import useReveal from './useReveal';
+import { motion } from 'framer-motion';
 import useAutoplay from './useAutoplay';
+import { easeOut, fadeUp, maskLine, stagger, viewportOnce } from './motion';
 
 const stats = [
   { value: '72', label: 'hours of conching before a single bar is dipped' },
@@ -26,79 +27,130 @@ const values = [
 ];
 
 export default function AboutPanels() {
-  const root = useRef(null);
   const video = useRef(null);
-
-  useReveal(root);
   useAutoplay(video);
 
   return (
-    <div ref={root}>
+    <>
       <section className="story story--flat">
         <div className="story__inner">
-          <div className="story__media" data-reveal>
+          <motion.div
+            className="story__media"
+            initial={{ x: -70, opacity: 0, scale: 0.94 }}
+            whileInView={{ x: 0, opacity: 1, scale: 1 }}
+            viewport={viewportOnce}
+            transition={{ duration: 1.1, ease: easeOut }}
+          >
             <div className="story__card">
               <video ref={video} autoPlay muted loop playsInline preload="auto" aria-hidden="true">
                 <source src="/videos/1-1.mp4" type="video/mp4" />
               </video>
             </div>
-          </div>
+          </motion.div>
 
-          <div className="story__text" data-reveal>
-            <p className="story__eyebrow">How we started</p>
+          <motion.div
+            className="story__text"
+            variants={stagger(0.1)}
+            initial="hidden"
+            whileInView="show"
+            viewport={viewportOnce}
+          >
+            <motion.p className="story__eyebrow" variants={fadeUp}>
+              How we started
+            </motion.p>
+
             <h2 className="story__title">
-              <span className="story__line-wrap">
-                <span className="story__line">One churn,</span>
-              </span>
-              <span className="story__line-wrap">
-                <span className="story__line">one recipe.</span>
-              </span>
+              {['One churn,', 'one recipe.'].map((line) => (
+                <span className="story__line-wrap" key={line}>
+                  <motion.span className="story__line" variants={maskLine}>
+                    {line}
+                  </motion.span>
+                </span>
+              ))}
             </h2>
-            <p className="story__body">
+
+            <motion.p className="story__body" variants={fadeUp}>
               It began with a second hand churn in a kitchen too small for it, and a
               stubborn idea that a chocolate bar should taste of cocoa rather than sugar.
               Ten years later the kitchen is a little bigger, the churn is the same one,
               and the recipe has not moved an inch.
-            </p>
-          </div>
+            </motion.p>
+          </motion.div>
         </div>
       </section>
 
       <section className="craft craft--flat">
         <div className="craft__body">
-          <div className="section-head" data-reveal>
-            <p className="section-eyebrow">By the numbers</p>
-            <h2 className="section-title">Made slowly, on purpose.</h2>
-          </div>
+          <motion.div
+            className="section-head"
+            variants={stagger(0.1)}
+            initial="hidden"
+            whileInView="show"
+            viewport={viewportOnce}
+          >
+            <motion.p className="section-eyebrow" variants={fadeUp}>
+              By the numbers
+            </motion.p>
+            <motion.h2 className="section-title" variants={fadeUp}>
+              Made slowly, on purpose.
+            </motion.h2>
+          </motion.div>
 
-          <div className="craft__stats" data-reveal-group>
+          <motion.div
+            className="craft__stats"
+            variants={stagger(0.14)}
+            initial="hidden"
+            whileInView="show"
+            viewport={viewportOnce}
+          >
             {stats.map(({ value, label }) => (
-              <div className="craft__stat" key={value}>
+              <motion.div className="craft__stat" key={value} variants={fadeUp}>
                 <span className="craft__num">{value}</span>
                 <span className="craft__label">{label}</span>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
       <section className="values">
         <div className="values__inner">
-          <div className="section-head" data-reveal>
-            <p className="section-eyebrow">What we hold to</p>
-            <h2 className="section-title">Three rules we do not bend.</h2>
-          </div>
+          <motion.div
+            className="section-head"
+            variants={stagger(0.1)}
+            initial="hidden"
+            whileInView="show"
+            viewport={viewportOnce}
+          >
+            <motion.p className="section-eyebrow" variants={fadeUp}>
+              What we hold to
+            </motion.p>
+            <motion.h2 className="section-title" variants={fadeUp}>
+              Three rules we do not bend.
+            </motion.h2>
+          </motion.div>
 
-          <div className="values__grid" data-reveal-group>
+          <motion.div
+            className="values__grid"
+            variants={stagger(0.12)}
+            initial="hidden"
+            whileInView="show"
+            viewport={viewportOnce}
+          >
             {values.map(({ title, note }) => (
-              <article className="value" key={title}>
+              <motion.article
+                className="value"
+                key={title}
+                variants={fadeUp}
+                whileHover={{ y: -8, transition: { type: 'spring', stiffness: 220, damping: 18 } }}
+              >
                 <h3 className="value__title">{title}</h3>
                 <p className="value__note">{note}</p>
-              </article>
+              </motion.article>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
-    </div>
+    </>
   );
 }

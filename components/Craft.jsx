@@ -1,108 +1,93 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useRef } from 'react';
+import { motion } from 'framer-motion';
+import useAutoplay from './useAutoplay';
+import { fadeUp, flyIn, maskLine, stagger, viewportOnce } from './motion';
 
-gsap.registerPlugin(ScrollTrigger);
-
-const words = ['Real cocoa', 'Small batch', 'Slow churned', 'No shortcuts'];
-
-const stats = [
-  { value: '72', label: 'hours of conching before a single bar is dipped' },
-  { value: '04', label: 'ingredients on the label, and nothing else' },
-  { value: '01', label: 'small kitchen, churning again every morning' },
+const proof = [
+  {
+    value: '72',
+    label: 'hours of conching before a single bar is dipped',
+    kind: 'video',
+    src: '/videos/nuts.mp4',
+  },
+  {
+    value: '04',
+    label: 'ingredients on the label, and nothing else',
+    kind: 'image',
+    src: '/images/ice-cream.png',
+  },
+  {
+    value: '01',
+    label: 'small kitchen, churning again every morning',
+    kind: 'image',
+    src: '/images/ice-creamm.png',
+  },
 ];
 
 export default function Craft() {
-  const root = useRef(null);
-  const row = useRef(null);
-
-  useEffect(() => {
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-
-    const ctx = gsap.context(() => {
-      // Endless band; the two halves are identical so -50% loops seamlessly.
-      const loop = gsap.to(row.current, {
-        xPercent: -50,
-        ease: 'none',
-        duration: 28,
-        repeat: -1,
-      });
-
-      let settle;
-
-      ScrollTrigger.create({
-        trigger: root.current,
-        start: 'top bottom',
-        end: 'bottom top',
-        onUpdate: (self) => {
-          const velocity = self.getVelocity();
-          const direction = velocity < 0 ? -1 : 1;
-          const boost = gsap.utils.clamp(1, 5, Math.abs(velocity) / 350);
-
-          gsap.to(loop, { timeScale: direction * boost, duration: 0.3, overwrite: true });
-
-          clearTimeout(settle);
-          settle = setTimeout(() => {
-            gsap.to(loop, { timeScale: direction, duration: 0.6, overwrite: true });
-          }, 140);
-        },
-      });
-
-      gsap
-        .timeline({
-          scrollTrigger: {
-            trigger: '.craft__body',
-            start: 'top 85%',
-            end: 'top 35%',
-            scrub: 1,
-          },
-          defaults: { ease: 'none' },
-        })
-        .from('.craft__eyebrow', { y: 24, autoAlpha: 0 }, 0)
-        .from('.craft__line', { yPercent: 112 }, 0.05)
-        .from('.craft__stat', { y: 40, autoAlpha: 0, stagger: 0.14 }, 0.25);
-
-      return () => clearTimeout(settle);
-    }, root);
-
-    return () => ctx.revert();
-  }, []);
+  const media = useRef(null);
+  useAutoplay(media);
 
   return (
-    <section className="craft" ref={root}>
-      <div className="marquee" aria-hidden="true">
-        <div className="marquee__row" ref={row}>
-          {[0, 1].map((half) => (
-            <span className="marquee__group" key={half}>
-              {words.map((word) => (
-                <span className="marquee__item" key={word}>
-                  {word}
-                  <i className="marquee__dot" />
-                </span>
-              ))}
-            </span>
-          ))}
-        </div>
-      </div>
+    <section className="proof">
+      <div className="proof__inner">
+        <motion.div
+          className="proof__head"
+          variants={stagger(0.1)}
+          initial="hidden"
+          whileInView="show"
+          viewport={viewportOnce}
+        >
+          <motion.p className="section-eyebrow" variants={fadeUp}>
+            The craft
+          </motion.p>
 
-      <div className="craft__body">
-        <div className="craft__head">
-          <p className="craft__eyebrow">The craft</p>
-          <h2 className="craft__title">
-            <span className="craft__line-wrap">
-              <span className="craft__line">Made slowly, on purpose.</span>
+          <h2 className="proof__title">
+            <span className="proof__line-wrap">
+              <motion.span className="proof__line" variants={maskLine}>
+                Made slowly, on purpose.
+              </motion.span>
             </span>
           </h2>
-        </div>
 
-        <div className="craft__stats">
-          {stats.map(({ value, label }) => (
-            <div className="craft__stat" key={value}>
-              <span className="craft__num">{value}</span>
-              <span className="craft__label">{label}</span>
-            </div>
+          <motion.p className="proof__intro" variants={fadeUp}>
+            No factory line, no shortcuts and no ingredient we cannot name. Here is
+            what that actually costs us, and why it is worth it.
+          </motion.p>
+        </motion.div>
+
+        <div className="proof__grid">
+          {proof.map(({ value, label, kind, src }, i) => (
+            <motion.div
+              className="card-slot"
+              key={value}
+              initial="hidden"
+              whileInView="show"
+              viewport={viewportOnce}
+            >
+              <motion.article
+                className="proof-card"
+                variants={flyIn(i)}
+                whileHover={{ y: -10, transition: { type: 'spring', stiffness: 220, damping: 18 } }}
+              >
+                <div className="proof-card__media">
+                  {kind === 'video' ? (
+                    <video ref={media} autoPlay muted loop playsInline preload="auto" aria-hidden="true">
+                      <source src={src} type="video/mp4" />
+                    </video>
+                  ) : (
+                    <img src={src} alt="" aria-hidden="true" />
+                  )}
+                </div>
+
+                <div className="proof-card__body">
+                  <span className="proof-card__value">{value}</span>
+                  <span className="proof-card__label">{label}</span>
+                </div>
+              </motion.article>
+            </motion.div>
           ))}
         </div>
       </div>

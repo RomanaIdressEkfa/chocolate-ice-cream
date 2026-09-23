@@ -27,71 +27,73 @@ export default function Hero() {
         .from('[data-intro="cue"]', { autoAlpha: 0, duration: 0.8, stagger: 0.1 }, 0.8)
         .from('[data-intro="bottom"]', { y: 30, autoAlpha: 0, duration: 0.8 }, 0.85);
 
+      // Sticky rather than pinned: no DOM is moved, so React stays happy and
+      // the scroll distance is exactly the wrapper height.
       gsap
         .timeline({
           scrollTrigger: {
             trigger: root.current,
             start: 'top top',
-            end: '+=160%',
-            scrub: 1,
-            pin: true,
-            anticipatePin: 1,
+            end: 'bottom bottom',
+            scrub: 0.6,
           },
           defaults: { ease: 'none' },
         })
-        .to('.hero__title--left', { xPercent: -30, autoAlpha: 0.15 }, 0)
-        .to('.hero__title--right', { xPercent: 30, autoAlpha: 0.15 }, 0)
-        .to('.hero__video', { scale: 1.18 }, 0)
-        .to('.hero__chunks--left', { yPercent: -48, xPercent: -14, rotate: -12 }, 0)
-        .to('.hero__chunks--right', { yPercent: 52, xPercent: 12, rotate: 10 }, 0);
+        .to('.hero__title--left', { xPercent: -26, autoAlpha: 0.15 }, 0)
+        .to('.hero__title--right', { xPercent: 26, autoAlpha: 0.15 }, 0)
+        .to('.hero__video', { scale: 1.14 }, 0)
+        .to('.hero__chunks--left', { yPercent: -40, xPercent: -12, rotate: -10 }, 0)
+        .to('.hero__chunks--right', { yPercent: 44, xPercent: 10, rotate: 8 }, 0);
     }, root);
 
     return () => ctx.revert();
   }, []);
 
   return (
-    <section className="hero" id="home" ref={root}>
-      <video
-        ref={video}
-        className="hero__video"
-        autoPlay
-        muted
-        loop
-        playsInline
-        preload="auto"
-        aria-hidden="true"
-      >
-        <source src="/videos/1-1.mp4" type="video/mp4" />
-      </video>
+    <section className="hero-wrap" ref={root}>
+      <div className="hero" id="home">
+        <video
+          ref={video}
+          className="hero__video"
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="auto"
+          aria-hidden="true"
+        >
+          <source src="/videos/1-1.mp4" type="video/mp4" />
+        </video>
 
-      <div className="hero__veil" aria-hidden="true" />
+        <div className="hero__veil" aria-hidden="true" />
 
-      <div className="hero__chunks hero__chunks--right" aria-hidden="true">
-        <img src="/images/ice-creamm.png" alt="" />
-      </div>
+        <div className="hero__chunks hero__chunks--right" aria-hidden="true">
+          <img src="/images/ice-creamm.png" alt="" />
+        </div>
 
-      <h1 className="hero__headline">
-        <span className="hero__title hero__title--left">
-          <span className="hero__line-wrap">
-            <span className="hero__line">Chocolate</span>
+        <h1 className="hero__headline">
+          <span className="hero__title hero__title--left">
+            <span className="hero__line-wrap">
+              <span className="hero__line">Chocolate</span>
+            </span>
+            <span className="hero__line-wrap">
+              <span className="hero__line">makes</span>
+            </span>
           </span>
-          <span className="hero__line-wrap">
-            <span className="hero__line">makes</span>
-          </span>
-        </span>
 
-        <span className="hero__title hero__title--right">
-          <span className="hero__line-wrap">
-            <span className="hero__line">Everything</span>
+          <span className="hero__title hero__title--right">
+            <span className="hero__line-wrap">
+              <span className="hero__line">Everything</span>
+            </span>
+            <span className="hero__line-wrap">
+              <span className="hero__line">better.</span>
+            </span>
           </span>
-          <span className="hero__line-wrap">
-            <span className="hero__line">better.</span>
-          </span>
-        </span>
-      </h1>
+        </h1>
 
-      <div className="hero__chunks hero__chunks--left">
-        <img src="/images/ice-cream.png" alt="Chocolate chunks" />
+        <div className="hero__chunks hero__chunks--left">
+          <img src="/images/ice-cream.png" alt="Chocolate chunks" />
+        </div>
       </div>
     </section>
   );
