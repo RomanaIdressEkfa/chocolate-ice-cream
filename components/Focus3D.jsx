@@ -55,7 +55,7 @@ export default function Focus3D({ id, eyebrow, lines, body, note, video }) {
                 muted
                 loop
                 playsInline
-                preload="auto"
+                preload="none"
                 aria-hidden="true"
               >
                 <source src={video} type="video/mp4" />

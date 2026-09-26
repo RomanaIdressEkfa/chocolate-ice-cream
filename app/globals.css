@@ -285,82 +285,7 @@ h1 {
 
 /* ---------------- Responsive ---------------- */
 
-@media (max-width: 1024px) {
-  .scroll-cue {
-    display: none;
-  }
 
-  .hero__chunks--left {
-    left: 2%;
-    top: 58%;
-    width: clamp(12rem, 38vw, 18rem);
-  }
-
-  .hero__chunks--right {
-    right: 2%;
-    top: 10%;
-    width: clamp(13rem, 42vw, 20rem);
-  }
-}
-
-@media (max-width: 760px) {
-  .hero-wrap {
-    height: auto;
-  }
-
-  .hero {
-    position: static;
-    height: auto;
-    min-height: 100svh;
-    padding-top: 6rem;
-    padding-bottom: 6rem;
-  }
-
-  .hero__headline {
-    flex-direction: column;
-    justify-content: center;
-    gap: clamp(2.5rem, 8vh, 4.5rem);
-    text-align: center;
-  }
-
-  .hero__title,
-  .hero__title--left,
-  .hero__title--right {
-    text-align: center;
-    font-size: clamp(2rem, 9vw, 3rem);
-  }
-
-  .hero__chunks--left {
-    left: -4%;
-    top: 62%;
-    width: 52vw;
-  }
-
-  .hero__chunks--right {
-    right: -4%;
-    top: 12%;
-    width: 56vw;
-  }
-
-  .nav__brand {
-    font-size: 0.8rem;
-    letter-spacing: 0.12em;
-    gap: 0.5rem;
-  }
-
-  .nav__brand-icon {
-    width: 1.6rem;
-    height: 1.6rem;
-  }
-
-  .nav__link {
-    font-size: 0.85rem;
-  }
-
-  .nav__link--desktop {
-    display: none;
-  }
-}
 
 @media (prefers-reduced-motion: reduce) {
   * {
@@ -474,25 +399,6 @@ h1 {
   will-change: transform;
 }
 
-@media (max-width: 860px) {
-  .story {
-    min-height: auto;
-  }
-
-  .story__inner {
-    grid-template-columns: 1fr;
-    gap: clamp(2.5rem, 8vw, 3.5rem);
-  }
-
-  .story__card {
-    aspect-ratio: 3 / 4;
-  }
-
-  .story__chunk {
-    left: -8%;
-    width: 44%;
-  }
-}
 
 /* ---------------- Flavours (section 3) ---------------- */
 
@@ -606,15 +512,6 @@ h1 {
   color: rgba(255, 255, 255, 0.7);
 }
 
-@media (max-width: 860px) {
-  .flavours {
-    min-height: auto;
-  }
-
-  .flavours__track {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
 
 /* ---------------- Contact (section 4) ---------------- */
 
@@ -732,21 +629,6 @@ h1 {
   color: var(--cream);
 }
 
-@media (max-width: 860px) {
-  .contact {
-    min-height: auto;
-  }
-
-  .contact__chunk {
-    width: 44vw;
-    opacity: 0.55;
-  }
-
-  .contact__footer {
-    justify-content: center;
-    text-align: center;
-  }
-}
 
 /* ---------------- Craft stats (used by the About page) ---------------- */
 
@@ -822,12 +704,6 @@ h1 {
   color: rgba(255, 255, 255, 0.68);
 }
 
-@media (max-width: 860px) {
-  .craft__stats {
-    grid-template-columns: 1fr;
-    gap: clamp(1.75rem, 5vw, 2.5rem);
-  }
-}
 
 .contact__credit a {
   color: var(--cream);
@@ -1295,35 +1171,7 @@ h1 {
   color: var(--cream);
 }
 
-@media (max-width: 860px) {
-  .shop__grid,
-  .perks__inner,
-  .values__grid,
-  .contact-page__inner {
-    grid-template-columns: 1fr;
-  }
 
-  .page-hero {
-    min-height: auto;
-    padding-top: clamp(8rem, 20vh, 11rem);
-  }
-
-  .page-hero__chunk {
-    width: 42vw;
-    opacity: 0.5;
-  }
-
-  .site-footer__inner {
-    justify-content: center;
-    text-align: center;
-  }
-}
-
-@media (max-width: 560px) {
-  .flavours__track {
-    grid-template-columns: 1fr;
-  }
-}
 
 /* ---------------- Focus panels (nuts, cream) ---------------- */
 
@@ -1428,33 +1276,6 @@ h1 {
   color: rgba(255, 255, 255, 0.58);
 }
 
-@media (max-width: 860px) {
-  .focus-wrap {
-    height: auto;
-  }
-
-  .focus {
-    position: static;
-    height: auto;
-    padding: clamp(3.5rem, 9vh, 5rem) var(--gutter);
-  }
-
-  .focus__frame {
-    position: relative;
-    inset: auto;
-    clip-path: none;
-    aspect-ratio: 4 / 5;
-    border-radius: clamp(1.25rem, 2.2vw, 2rem);
-    overflow: hidden;
-  }
-
-  .focus__copy {
-    position: static;
-    width: 100%;
-    margin-top: clamp(2rem, 6vw, 3rem);
-    transform: none;
-  }
-}
 
 /* ---------------- Card slots ---------------- */
 
@@ -1542,32 +1363,6 @@ h1 {
   transform: none;
 }
 
-@media (max-width: 860px) {
-  .focus-wrap--3d {
-    height: auto;
-  }
-
-  .focus3d__stage {
-    position: relative;
-    inset: auto;
-    padding-left: 0;
-    place-items: center;
-    perspective: 900px;
-  }
-
-  .focus3d__card {
-    width: 100%;
-  }
-
-  .focus--3d .focus__copy {
-    position: static;
-    top: auto;
-    bottom: auto;
-    right: auto;
-    width: 100%;
-    margin-top: clamp(2rem, 6vw, 3rem);
-  }
-}
 
 /* ============================================================
    Responsive pass
@@ -1920,5 +1715,141 @@ h1 {
 
   .proof-card__media {
     aspect-ratio: 16 / 9;
+  }
+}
+
+/* ============================================================
+   Mobile layer
+   Everything below 1080px in one place. Spacing is driven by vw
+   rather than vh, because a tall phone makes vh padding enormous.
+   ============================================================ */
+
+@media (max-width: 1080px) {
+  :root {
+    --section-pad: clamp(2.5rem, 7vw, 4.5rem);
+  }
+
+  /* Split layouts become single column. */
+  .story__inner,
+  .contact-page__inner,
+  .perks__inner,
+  .values__grid,
+  .craft__stats,
+  .proof__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .flavours__track,
+  .shop__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* One rhythm for every seam. */
+  .story,
+  .story--flat,
+  .flavours,
+  .craft--flat,
+  .proof,
+  .contact,
+  .shop,
+  .perks,
+  .values,
+  .contact-page,
+  .focus {
+    padding-top: var(--section-pad);
+    padding-bottom: var(--section-pad);
+  }
+
+  .craft__body {
+    padding-top: 0;
+  }
+
+  .flavours {
+    gap: clamp(1.5rem, 5vw, 2.5rem);
+  }
+
+  .story__card {
+    aspect-ratio: 3 / 4;
+  }
+
+  .story__chunk {
+    left: -8%;
+    width: 44%;
+  }
+
+  /* The 3D card has an explicit width and height on desktop, so both
+     have to be released here or it ends up stretched. */
+  .focus3d__card {
+    width: min(100%, 26rem);
+    height: auto;
+    aspect-ratio: 4 / 5;
+  }
+
+  .hero__chunks--left {
+    left: -2%;
+    top: 58%;
+    width: clamp(11rem, 30vw, 17rem);
+  }
+
+  .hero__chunks--right {
+    right: -2%;
+    top: 8%;
+    width: clamp(12rem, 32vw, 18rem);
+  }
+
+  .page-hero {
+    min-height: auto;
+    padding: clamp(7.5rem, 20vw, 10rem) var(--gutter) var(--section-pad);
+  }
+
+  .contact__chunk {
+    width: 40vw;
+    opacity: 0.5;
+  }
+}
+
+/* ---------------- Phone ---------------- */
+
+@media (max-width: 720px) {
+  .hero {
+    min-height: 100svh;
+    padding: 5rem var(--gutter) 4.5rem;
+  }
+
+  .hero__headline {
+    gap: clamp(1.5rem, 5vh, 2.5rem);
+  }
+
+  /* About us is the first thing to go when the bar gets tight. */
+  .nav__link--desktop {
+    display: none;
+  }
+
+  .flavours__track,
+  .shop__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .flavour {
+    min-height: 24rem;
+  }
+
+  .page-hero {
+    padding-top: clamp(6.5rem, 22vw, 8.5rem);
+  }
+
+  .page-hero__chunk {
+    width: 44vw;
+    opacity: 0.4;
+  }
+
+  .contact__chunk {
+    width: 46vw;
+    opacity: 0.4;
+  }
+
+  .site-footer__inner {
+    justify-content: center;
+    text-align: center;
   }
 }

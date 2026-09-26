@@ -74,7 +74,7 @@ export default function Craft() {
               >
                 <div className="proof-card__media">
                   {kind === 'video' ? (
-                    <video ref={media} autoPlay muted loop playsInline preload="auto" aria-hidden="true">
+                    <video ref={media} autoPlay muted loop playsInline preload="none" aria-hidden="true">
                       <source src={src} type="video/mp4" />
                     </video>
                   ) : (

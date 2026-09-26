@@ -97,7 +97,7 @@ export default function Story() {
               muted
               loop
               playsInline
-              preload="auto"
+              preload="none"
               aria-hidden="true"
             >
               <source src="/videos/1-1.mp4" type="video/mp4" />

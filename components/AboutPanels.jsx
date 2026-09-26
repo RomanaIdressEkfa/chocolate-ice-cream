@@ -42,7 +42,7 @@ export default function AboutPanels() {
             transition={{ duration: 1.1, ease: easeOut }}
           >
             <div className="story__card">
-              <video ref={video} autoPlay muted loop playsInline preload="auto" aria-hidden="true">
+              <video ref={video} autoPlay muted loop playsInline preload="none" aria-hidden="true">
                 <source src="/videos/1-1.mp4" type="video/mp4" />
               </video>
             </div>

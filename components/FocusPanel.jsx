@@ -79,7 +79,7 @@ export default function FocusPanel({ id, eyebrow, lines, body, note, video, side
             muted
             loop
             playsInline
-            preload="auto"
+            preload="none"
             aria-hidden="true"
           >
             <source src={video} type="video/mp4" />

@@ -79,8 +79,8 @@ export default function Contact() {
           ))}
         </h2>
 
-        <a className="contact__mail" href="mailto:hello@chocolate.com">
-          hello@chocolate.com
+        <a className="contact__mail" href="mailto:romanaidressekfa@gmail.com">
+          romanaidressekfa@gmail.com
         </a>
       </div>
     </section>

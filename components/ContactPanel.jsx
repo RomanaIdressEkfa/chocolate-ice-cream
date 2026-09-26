@@ -4,9 +4,13 @@ import { motion } from 'framer-motion';
 import { fadeUp, stagger, viewportOnce } from './motion';
 
 const details = [
-  { label: 'Email', value: 'hello@chocolate.com', href: 'mailto:hello@chocolate.com' },
-  { label: 'Phone', value: '+880 1000 000000', href: 'tel:+8801000000000' },
-  { label: 'Kitchen', value: '12 Cocoa Lane, Dhaka 1205' },
+  {
+    label: 'Email',
+    value: 'romanaidressekfa@gmail.com',
+    href: 'mailto:romanaidressekfa@gmail.com',
+  },
+  { label: 'Phone', value: '01307957682', href: 'tel:+8801307957682' },
+  { label: 'Kitchen', value: 'Mirpur, Dhaka, Bangladesh' },
   { label: 'Open', value: 'Tue to Sun, 10:00 until the trays are empty' },
 ];
 
