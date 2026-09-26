@@ -13,14 +13,17 @@ const stats = [
 
 const values = [
   {
+    image: '/images/ice-cream.png',
     title: 'Cocoa first',
     note: 'We buy single origin beans direct, at a price the farm sets rather than the market.',
   },
   {
+    image: '/images/ice-creamm.png',
     title: 'Nothing spare',
     note: 'No stabilisers, no emulsifiers, no shelf life tricks. It melts because it should.',
   },
   {
+    image: '/images/ice-cream.png',
     title: 'Small on purpose',
     note: 'We could churn more. We would rather churn better, and stop when it is right.',
   },
@@ -137,13 +140,16 @@ export default function AboutPanels() {
             whileInView="show"
             viewport={viewportOnce}
           >
-            {values.map(({ title, note }) => (
+            {values.map(({ title, note, image }) => (
               <motion.article
                 className="value"
                 key={title}
                 variants={fadeUp}
-                whileHover={{ y: -8, transition: { type: 'spring', stiffness: 220, damping: 18 } }}
+                whileHover={{ y: -8, transition: { type: 'spring', stiffness: 170, damping: 20 } }}
               >
+                <div className="value__media">
+                  <img src={image} alt="" aria-hidden="true" />
+                </div>
                 <h3 className="value__title">{title}</h3>
                 <p className="value__note">{note}</p>
               </motion.article>

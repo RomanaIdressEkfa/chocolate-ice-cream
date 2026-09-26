@@ -28,7 +28,7 @@ export default function Story() {
             trigger: root.current,
             start: 'top 85%',
             end: 'top 12%',
-            scrub: 1,
+            scrub: 1.5,
           },
           defaults: { ease: 'none' },
         })
@@ -47,7 +47,7 @@ export default function Story() {
           trigger: root.current,
           start: 'top bottom',
           end: 'bottom top',
-          scrub: 1,
+          scrub: 1.5,
         },
       });
 

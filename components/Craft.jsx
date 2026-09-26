@@ -70,7 +70,7 @@ export default function Craft() {
               <motion.article
                 className="proof-card"
                 variants={flyIn(i)}
-                whileHover={{ y: -10, transition: { type: 'spring', stiffness: 220, damping: 18 } }}
+                whileHover={{ y: -10, transition: { type: 'spring', stiffness: 170, damping: 20 } }}
               >
                 <div className="proof-card__media">
                   {kind === 'video' ? (

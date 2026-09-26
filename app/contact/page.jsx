@@ -10,6 +10,7 @@ export default function ContactPage() {
   return (
     <>
       <PageHero
+        video="/videos/1-1.mp4"
         eyebrow="Contact"
         lines={['Let us talk', 'chocolate.']}
         intro="Questions about an order, a wholesale list, or which bar to start with. Send a note and a real person will answer it."

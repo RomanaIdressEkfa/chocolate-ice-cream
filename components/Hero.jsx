@@ -35,15 +35,15 @@ export default function Hero() {
             trigger: root.current,
             start: 'top top',
             end: 'bottom bottom',
-            scrub: 0.6,
+            scrub: 1.3,
           },
           defaults: { ease: 'none' },
         })
-        .to('.hero__title--left', { xPercent: -26, autoAlpha: 0.15 }, 0)
-        .to('.hero__title--right', { xPercent: 26, autoAlpha: 0.15 }, 0)
-        .to('.hero__video', { scale: 1.14 }, 0)
-        .to('.hero__chunks--left', { yPercent: -40, xPercent: -12, rotate: -10 }, 0)
-        .to('.hero__chunks--right', { yPercent: 44, xPercent: 10, rotate: 8 }, 0);
+        .to('.hero__title--left', { xPercent: -16, autoAlpha: 0.3 }, 0)
+        .to('.hero__title--right', { xPercent: 16, autoAlpha: 0.3 }, 0)
+        .to('.hero__video', { scale: 1.07 }, 0)
+        .to('.hero__chunks--left', { yPercent: -24, xPercent: -8, rotate: -6 }, 0)
+        .to('.hero__chunks--right', { yPercent: 26, xPercent: 7, rotate: 5 }, 0);
     }, root);
 
     return () => ctx.revert();

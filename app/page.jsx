@@ -4,6 +4,7 @@ import FocusPanel from '@/components/FocusPanel';
 import Focus3D from '@/components/Focus3D';
 import Story from '@/components/Story';
 import Flavours from '@/components/Flavours';
+import Showcase from '@/components/Showcase';
 import Craft from '@/components/Craft';
 import Contact from '@/components/Contact';
 
@@ -34,6 +35,7 @@ export default function Home() {
 
       <Story />
       <Flavours />
+      <Showcase />
       <Craft />
       <Contact />
     </>

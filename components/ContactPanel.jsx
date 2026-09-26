@@ -1,6 +1,8 @@
 'use client';
 
+import { useRef } from 'react';
 import { motion } from 'framer-motion';
+import useAutoplay from './useAutoplay';
 import { fadeUp, stagger, viewportOnce } from './motion';
 
 const details = [
@@ -15,6 +17,9 @@ const details = [
 ];
 
 export default function ContactPanel() {
+  const media = useRef(null);
+  useAutoplay(media);
+
   return (
     <section className="contact-page">
       <div className="contact-page__inner">
@@ -83,6 +88,12 @@ export default function ContactPanel() {
           whileInView="show"
           viewport={viewportOnce}
         >
+          <motion.div className="contact-details__media" variants={fadeUp}>
+            <video ref={media} autoPlay muted loop playsInline preload="none" aria-hidden="true">
+              <source src="/videos/nuts.mp4" type="video/mp4" />
+            </video>
+          </motion.div>
+
           <motion.p className="section-eyebrow" variants={fadeUp}>
             Find us
           </motion.p>

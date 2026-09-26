@@ -21,7 +21,7 @@ export default function Contact() {
             trigger: root.current,
             start: 'top 82%',
             end: 'top 18%',
-            scrub: 1,
+            scrub: 1.5,
           },
           defaults: { ease: 'none' },
         })
@@ -34,7 +34,7 @@ export default function Contact() {
         trigger: root.current,
         start: 'top bottom',
         end: 'bottom bottom',
-        scrub: 1,
+        scrub: 1.5,
       };
 
       gsap.fromTo(

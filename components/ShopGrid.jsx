@@ -43,7 +43,7 @@ export default function ShopGrid() {
               <motion.article
                 className="product"
                 variants={flyIn(i)}
-                whileHover={{ y: -10, transition: { type: 'spring', stiffness: 220, damping: 18 } }}
+                whileHover={{ y: -10, transition: { type: 'spring', stiffness: 170, damping: 20 } }}
               >
                 <div className="product__media">
                   <span className="product__index">{index}</span>

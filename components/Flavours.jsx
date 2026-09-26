@@ -41,7 +41,7 @@ export default function Flavours() {
             <motion.article
               className="flavour"
               variants={flyIn(i)}
-              whileHover={{ y: -10, transition: { type: 'spring', stiffness: 220, damping: 18 } }}
+              whileHover={{ y: -10, transition: { type: 'spring', stiffness: 170, damping: 20 } }}
             >
               <span className="flavour__index">{index}</span>
 

@@ -139,7 +139,7 @@ h1 {
 
 .hero-wrap {
   position: relative;
-  height: 170vh;
+  height: 128vh;
 }
 
 .hero {
@@ -1177,7 +1177,7 @@ h1 {
 
 .focus-wrap {
   position: relative;
-  height: 190vh;
+  height: 215vh;
   background: #1b0d05;
 }
 
@@ -1190,46 +1190,11 @@ h1 {
   background: #1b0d05;
 }
 
-.focus__frame {
-  position: absolute;
-  inset: 0;
-  --ct: 15%;
-  --cb: 15%;
-  --crad: 28px;
-  clip-path: inset(var(--ct) var(--cr) var(--cb) var(--cl) round var(--crad));
-}
-
-.focus--right .focus__frame {
-  --cr: 6%;
-  --cl: 52%;
-}
-
-.focus--left .focus__frame {
-  --cr: 52%;
-  --cl: 6%;
-}
-
 .focus__video {
   width: 100%;
   height: 100%;
   object-fit: cover;
   will-change: transform;
-}
-
-.focus__copy {
-  position: absolute;
-  top: 50%;
-  z-index: 2;
-  width: min(34rem, 38vw);
-  transform: translateY(-50%);
-}
-
-.focus--right .focus__copy {
-  left: clamp(2rem, 6vw, 6rem);
-}
-
-.focus--left .focus__copy {
-  right: clamp(2rem, 6vw, 6rem);
 }
 
 .focus__eyebrow {
@@ -1295,26 +1260,7 @@ h1 {
 /* ---------------- 3D focus panel ---------------- */
 
 .focus-wrap--3d {
-  height: 210vh;
-}
-
-.focus3d__stage {
-  position: absolute;
-  inset: 0;
-  display: grid;
-  place-items: center start;
-  padding-left: 7vw;
-  perspective: 1500px;
-  perspective-origin: 50% 50%;
-}
-
-.focus3d__card {
-  position: relative;
-  width: 40vw;
-  height: 68svh;
-  border-radius: clamp(1.25rem, 2.2vw, 2rem);
-  transform-style: preserve-3d;
-  filter: drop-shadow(0 50px 90px rgba(0, 0, 0, 0.55));
+  height: 340vh;
 }
 
 .focus3d__face {
@@ -1352,17 +1298,6 @@ h1 {
  * Framer Motion writes its own transform on the copy, so this panel centres
  * with flexbox instead of a translate that would be overwritten.
  */
-.focus--3d .focus__copy {
-  top: 0;
-  bottom: 0;
-  left: auto;
-  right: clamp(2rem, 6vw, 6rem);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  transform: none;
-}
-
 
 /* ============================================================
    Responsive pass
@@ -1458,9 +1393,9 @@ h1 {
   }
 
   .focus3d__card {
-    width: min(100%, 26rem);
+    width: 100%;
     height: auto;
-    aspect-ratio: 4 / 5;
+    aspect-ratio: 4 / 3;
   }
 
   /* One column for the split layouts, two for the card grids. */
@@ -1851,5 +1786,674 @@ h1 {
   .site-footer__inner {
     justify-content: center;
     text-align: center;
+  }
+}
+
+/* ---------------- Inner page hero footage ---------------- */
+
+.page-hero__video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  will-change: transform;
+}
+
+.page-hero__veil {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(85% 70% at 50% 30%, rgba(58, 28, 12, 0.35) 0%, rgba(18, 8, 3, 0.9) 78%),
+    linear-gradient(180deg, rgba(18, 8, 3, 0.7) 0%, rgba(18, 8, 3, 0.45) 45%, rgba(18, 8, 3, 0.95) 100%);
+}
+
+.page-hero__chunk {
+  z-index: 1;
+}
+
+/* ---------------- Media band ---------------- */
+
+.band {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-height: 76svh;
+  padding: clamp(5rem, 12vw, 8rem) var(--gutter);
+  overflow: hidden;
+  text-align: center;
+}
+
+.band__video {
+  position: absolute;
+  left: 0;
+  top: -15%;
+  width: 100%;
+  height: 130%;
+  object-fit: cover;
+  will-change: transform;
+}
+
+.band__veil {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(75% 65% at 50% 50%, rgba(18, 8, 3, 0.25) 0%, rgba(18, 8, 3, 0.82) 75%),
+    linear-gradient(180deg, rgba(18, 8, 3, 0.75) 0%, rgba(18, 8, 3, 0.35) 45%, rgba(18, 8, 3, 0.85) 100%);
+}
+
+.band__copy {
+  position: relative;
+  z-index: 2;
+  width: min(46rem, 100%);
+}
+
+.band__eyebrow {
+  margin: 0 0 clamp(1rem, 2vw, 1.5rem);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.68);
+}
+
+.band__title {
+  margin: 0;
+  font-size: clamp(2rem, 4.4vw, 4.25rem);
+  font-weight: 700;
+  line-height: 1.06;
+  letter-spacing: -0.03em;
+}
+
+.band__line-wrap {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.06em;
+}
+
+.band__line {
+  display: block;
+  will-change: transform;
+}
+
+.band__body {
+  margin: clamp(1.25rem, 2.5vw, 1.85rem) auto 0;
+  max-width: 34rem;
+  font-size: clamp(0.98rem, 1.15vw, 1.1rem);
+  line-height: 1.65;
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.band__cta {
+  display: inline-block;
+  margin-top: clamp(1.75rem, 3.5vw, 2.5rem);
+  padding: 0.9rem 1.9rem;
+  border-radius: 999px;
+  background: var(--cream);
+  color: #1a0f09;
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.band__cta:hover,
+.band__cta:focus-visible {
+  transform: scale(1.06);
+  background: #fff;
+}
+
+/* ---------------- Contact aside footage ---------------- */
+
+.contact-details__media {
+  aspect-ratio: 16 / 10;
+  margin-bottom: clamp(1.5rem, 3vw, 2rem);
+  border-radius: clamp(1rem, 1.8vw, 1.5rem);
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.contact-details__media video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ---------------- Value card accents ---------------- */
+
+.value__media {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 16 / 9;
+  margin-bottom: clamp(1rem, 2vw, 1.4rem);
+  border-radius: clamp(0.75rem, 1.4vw, 1.1rem);
+  background: rgba(255, 255, 255, 0.04);
+  overflow: hidden;
+}
+
+.value__media img {
+  width: 72%;
+  height: auto;
+  filter: drop-shadow(0 18px 30px rgba(0, 0, 0, 0.45));
+}
+
+/* ---------------- Tablet keeps two columns ---------------- */
+
+@media (max-width: 1080px) {
+  .perks__inner,
+  .values__grid,
+  .craft__stats,
+  .proof__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .band {
+    min-height: 64svh;
+  }
+}
+
+@media (max-width: 720px) {
+  .perks__inner,
+  .values__grid,
+  .craft__stats,
+  .proof__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .band {
+    min-height: 58svh;
+    padding: clamp(3.5rem, 12vw, 5rem) var(--gutter);
+  }
+
+  .contact-details__media {
+    aspect-ratio: 16 / 9;
+  }
+}
+
+/* ============================================================
+   Card and section polish
+   Depth, a warm accent and a glass sheen so the lower sections
+   carry the same weight as the video ones above them.
+   ============================================================ */
+
+:root {
+  --caramel: #d29760;
+}
+
+/* A soft warm glow sitting behind the card grids. */
+.flavours::before,
+.proof::before,
+.shop::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 30%;
+  width: min(80rem, 90vw);
+  height: min(40rem, 60vh);
+  transform: translate(-50%, -50%);
+  background: radial-gradient(closest-side, rgba(210, 151, 96, 0.16) 0%, rgba(210, 151, 96, 0) 100%);
+  pointer-events: none;
+}
+
+.shop {
+  position: relative;
+}
+
+/* ---------------- Cards ---------------- */
+
+.flavour,
+.proof-card,
+.product,
+.value {
+  position: relative;
+  isolation: isolate;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.07) 0%, rgba(255, 255, 255, 0) 38%),
+    linear-gradient(165deg, rgba(133, 70, 31, 0.5) 0%, rgba(32, 15, 6, 0.92) 72%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    0 22px 45px rgba(0, 0, 0, 0.38);
+  transition:
+    border-color 0.45s ease,
+    box-shadow 0.45s ease,
+    transform 0.45s ease;
+}
+
+/* A highlight that sweeps the top edge on hover. */
+.flavour::after,
+.proof-card::after,
+.product::after,
+.value::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(120% 80% at 50% -20%, rgba(210, 151, 96, 0.3) 0%, rgba(210, 151, 96, 0) 60%);
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.45s ease;
+  pointer-events: none;
+}
+
+.flavour:hover::after,
+.proof-card:hover::after,
+.product:hover::after,
+.value:hover::after {
+  opacity: 1;
+}
+
+.flavour:hover,
+.proof-card:hover,
+.product:hover,
+.value:hover {
+  border-color: rgba(210, 151, 96, 0.5);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.16),
+    0 32px 70px rgba(0, 0, 0, 0.5);
+}
+
+/* ---------------- Numbers and labels ---------------- */
+
+.flavour__index,
+.product__index {
+  color: var(--caramel);
+}
+
+.proof-card__value,
+.craft__num {
+  background: linear-gradient(180deg, #fff 0%, var(--caramel) 130%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.flavour__name,
+.product__name,
+.proof-card__value,
+.value__title,
+.perk__title {
+  letter-spacing: -0.03em;
+}
+
+/* A short accent rule under each section eyebrow. */
+.section-eyebrow,
+.flavours__eyebrow,
+.proof__head .section-eyebrow,
+.story__eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.section-eyebrow::before,
+.flavours__eyebrow::before,
+.story__eyebrow::before {
+  content: '';
+  width: clamp(1.5rem, 3vw, 2.75rem);
+  height: 1px;
+  background: var(--caramel);
+  flex: none;
+}
+
+/* ---------------- Story and contact depth ---------------- */
+
+.story__card {
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.12),
+    0 40px 90px rgba(0, 0, 0, 0.5);
+  transition: transform 0.5s ease;
+}
+
+.story__media:hover .story__card {
+  transform: translateY(-8px);
+}
+
+.contact::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 46%;
+  width: min(60rem, 85vw);
+  height: min(34rem, 55vh);
+  transform: translate(-50%, -50%);
+  background: radial-gradient(closest-side, rgba(210, 151, 96, 0.2) 0%, rgba(210, 151, 96, 0) 100%);
+  pointer-events: none;
+}
+
+.contact__mail {
+  text-decoration-color: var(--caramel);
+  text-decoration-thickness: 2px;
+}
+
+/* ---------------- Band and buttons ---------------- */
+
+.band__cta,
+.contact-form__submit {
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45);
+}
+
+.band__eyebrow {
+  color: var(--caramel);
+}
+
+/* ---------------- Showcase (two video marketing section) ---------------- */
+
+.showcase {
+  position: relative;
+  padding: clamp(4.5rem, 11vh, 7rem) var(--gutter);
+  background:
+    radial-gradient(70% 55% at 50% 0%, rgba(210, 151, 96, 0.18) 0%, rgba(24, 11, 4, 0) 62%),
+    linear-gradient(180deg, #180b04 0%, #1e0e05 100%);
+  overflow-x: clip;
+}
+
+.showcase__inner {
+  width: min(var(--container), 100%);
+  margin: 0 auto;
+}
+
+.showcase__head {
+  max-width: 46rem;
+  margin-bottom: clamp(2.5rem, 5vw, 4rem);
+}
+
+.showcase__title {
+  margin: 0;
+  font-size: clamp(2rem, 4.2vw, 4.25rem);
+  font-weight: 700;
+  line-height: 1.06;
+  letter-spacing: -0.03em;
+}
+
+.showcase__line-wrap {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.06em;
+}
+
+.showcase__line {
+  display: block;
+  will-change: transform;
+}
+
+.showcase__intro {
+  margin: clamp(1.25rem, 2.5vw, 1.75rem) 0 0;
+  font-size: clamp(0.98rem, 1.15vw, 1.1rem);
+  line-height: 1.65;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.showcase__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: clamp(1.25rem, 2.4vw, 2rem);
+}
+
+.showcase__item {
+  position: relative;
+  margin: 0;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: clamp(1.25rem, 2.2vw, 2rem);
+  overflow: hidden;
+  background: #1a0c04;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    0 26px 55px rgba(0, 0, 0, 0.42);
+  transition: border-color 0.45s ease, box-shadow 0.45s ease;
+}
+
+.showcase__item:hover {
+  border-color: rgba(210, 151, 96, 0.5);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.16),
+    0 36px 80px rgba(0, 0, 0, 0.55);
+}
+
+.showcase__media {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+}
+
+.showcase__media video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.7s ease;
+}
+
+.showcase__item:hover .showcase__media video {
+  transform: scale(1.05);
+}
+
+.showcase__veil {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(24, 11, 4, 0) 45%, rgba(24, 11, 4, 0.75) 100%);
+  pointer-events: none;
+}
+
+.showcase__caption {
+  padding: clamp(1.4rem, 2.6vw, 2rem);
+}
+
+.showcase__label {
+  margin: 0 0 0.6rem;
+  font-size: clamp(1.2rem, 1.8vw, 1.6rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+
+.showcase__note {
+  margin: 0;
+  max-width: 28rem;
+  font-size: 0.92rem;
+  line-height: 1.65;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.showcase__foot {
+  display: flex;
+  justify-content: center;
+  margin-top: clamp(2.5rem, 5vw, 3.5rem);
+}
+
+.showcase__cta {
+  display: inline-block;
+  padding: 0.95rem 2rem;
+  border-radius: 999px;
+  background: var(--cream);
+  color: #1a0f09;
+  font-size: 0.95rem;
+  font-weight: 500;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45);
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.showcase__cta:hover,
+.showcase__cta:focus-visible {
+  transform: scale(1.06);
+  background: #fff;
+}
+
+@media (max-width: 1080px) {
+  .showcase {
+    padding-top: var(--section-pad);
+    padding-bottom: var(--section-pad);
+  }
+
+  .showcase__media {
+    aspect-ratio: 16 / 10;
+  }
+}
+
+@media (max-width: 720px) {
+  .showcase__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .showcase__media {
+    aspect-ratio: 4 / 3;
+  }
+}
+
+
+/* ============================================================
+   Video sections on the shared container
+   Both panels now sit in the same column as the navigation, so
+   the left and right margins match every other section.
+   ============================================================ */
+
+.focus-wrap {
+  position: relative;
+  height: auto;
+  background: #1b0d05;
+}
+
+.focus {
+  position: relative;
+  display: block;
+  height: auto;
+  padding: clamp(4.5rem, 11vh, 7rem) var(--gutter);
+  background: #1b0d05;
+  overflow: hidden;
+}
+
+/* The turning card needs scroll room, so that one section sticks. */
+.focus--3d {
+  position: sticky;
+  top: 0;
+  display: grid;
+  place-items: center;
+  height: 100svh;
+  padding: 0 var(--gutter);
+}
+
+.focus__inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: clamp(2rem, 4.5vw, 4.5rem);
+  width: min(var(--container), 100%);
+  margin: 0 auto;
+}
+
+/* Which side the footage sits on. */
+.focus--right .focus__frame {
+  order: 2;
+}
+
+.focus--right .focus__copy {
+  order: 1;
+}
+
+.focus--left .focus3d__stage,
+.focus--3d .focus3d__stage {
+  order: 1;
+}
+
+.focus--left .focus__copy,
+.focus--3d .focus__copy {
+  order: 2;
+}
+
+/* A touch of breathing room between the card and its words. */
+.focus--3d .focus__copy {
+  padding-left: 10px;
+}
+
+.focus__frame {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  border-radius: clamp(1.25rem, 2.2vw, 2rem);
+  overflow: hidden;
+  clip-path: none;
+  inset: auto;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    0 40px 90px rgba(0, 0, 0, 0.5);
+}
+
+.focus__video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.focus__copy {
+  position: static;
+  width: 100%;
+  inset: auto;
+  transform: none;
+  display: block;
+}
+
+/* ---------------- The turning card ---------------- */
+
+.focus3d__stage {
+  position: relative;
+  inset: auto;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  perspective: 1500px;
+  perspective-origin: 50% 50%;
+}
+
+.focus3d__card {
+  position: relative;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 5;
+  border-radius: clamp(1.25rem, 2.2vw, 2rem);
+  transform-style: preserve-3d;
+  filter: drop-shadow(0 45px 85px rgba(0, 0, 0, 0.55));
+}
+
+.focus3d__video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ---------------- Narrow screens ---------------- */
+
+@media (max-width: 1080px) {
+  .focus-wrap--3d {
+    height: auto;
+  }
+
+  .focus,
+  .focus--3d {
+    position: static;
+    height: auto;
+    padding: var(--section-pad) var(--gutter);
+  }
+
+  .focus__inner {
+    grid-template-columns: 1fr;
+    gap: clamp(1.75rem, 5vw, 2.5rem);
+  }
+
+  /* Footage first, words underneath, whichever side it sat on. */
+  .focus--right .focus__frame,
+  .focus--left .focus3d__stage,
+  .focus--3d .focus3d__stage {
+    order: 1;
+  }
+
+  .focus--right .focus__copy,
+  .focus--left .focus__copy,
+  .focus--3d .focus__copy {
+    order: 2;
+    padding-left: 0;
+  }
+
+  .focus__frame,
+  .focus3d__card {
+    aspect-ratio: 4 / 3;
   }
 }

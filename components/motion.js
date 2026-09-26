@@ -6,7 +6,7 @@ export const viewportOnce = { once: true, amount: 0.2 };
 
 export const fadeUp = {
   hidden: { y: 44, opacity: 0 },
-  show: { y: 0, opacity: 1, transition: { duration: 0.85, ease: easeOut } },
+  show: { y: 0, opacity: 1, transition: { duration: 1.05, ease: easeOut } },
 };
 
 export const stagger = (staggerChildren = 0.12, delayChildren = 0) => ({
@@ -16,7 +16,7 @@ export const stagger = (staggerChildren = 0.12, delayChildren = 0) => ({
 
 export const maskLine = {
   hidden: { y: '115%' },
-  show: { y: '0%', transition: { duration: 0.95, ease: easeOut } },
+  show: { y: '0%', transition: { duration: 1.15, ease: easeOut } },
 };
 
 /**
@@ -43,11 +43,11 @@ export const flyIn = (i) => {
       opacity: 1,
       transition: {
         type: 'spring',
-        stiffness: 55,
-        damping: 15,
-        mass: 1.05,
-        delay: i * 0.1,
-        opacity: { duration: 0.45, delay: i * 0.1 },
+        stiffness: 40,
+        damping: 17,
+        mass: 1.2,
+        delay: i * 0.14,
+        opacity: { duration: 0.6, delay: i * 0.14 },
       },
     },
   };
