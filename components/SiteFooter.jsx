@@ -41,6 +41,13 @@ export default function SiteFooter() {
         </span>
 
         <nav className="site-footer__links" aria-label="Footer">
+          <a
+            href="https://www.instagram.com/romana.idress.ekfa/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Instagram
+          </a>
           <Link href="/shop">Shop</Link>
           <Link href="/about">About us</Link>
           <Link href="/contact">Contact</Link>

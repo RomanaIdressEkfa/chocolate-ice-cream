@@ -8,9 +8,12 @@ import useAutoplay from './useAutoplay';
 gsap.registerPlugin(ScrollTrigger);
 
 /**
- * Footage beside its copy, both inside the shared container so the section
- * lines up with the navigation above it. The card eases down to its resting
- * size as the section arrives.
+ * The footage arrives filling the screen, holds there while you scroll, then
+ * shrinks into its place in the container beside the copy.
+ *
+ * The section sticks so the large state can be held for as long as we like:
+ * the wrapper height is the scroll budget, and the timeline decides how much
+ * of it is spent holding, shrinking and settling.
  */
 export default function FocusPanel({ id, eyebrow, lines, body, note, video, side = 'right' }) {
   const root = useRef(null);
@@ -22,62 +25,100 @@ export default function FocusPanel({ id, eyebrow, lines, body, note, video, side
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
     const ctx = gsap.context(() => {
-      gsap
-        .timeline({
-          scrollTrigger: {
-            trigger: root.current,
-            start: 'top 82%',
-            end: 'top 25%',
-            scrub: 1.3,
-          },
-          defaults: { ease: 'none' },
-        })
-        .fromTo(
-          '.focus__frame',
-          { scale: 1.1, yPercent: 6, autoAlpha: 0.4 },
-          { scale: 1, yPercent: 0, autoAlpha: 1 },
-          0
-        )
-        .from('.focus__eyebrow', { autoAlpha: 0, y: 26 }, 0.15)
-        .from('.focus__line', { yPercent: 112, stagger: 0.08 }, 0.22)
-        .from('.focus__body', { autoAlpha: 0, y: 28 }, 0.42)
-        .from('.focus__note', { autoAlpha: 0, y: 20 }, 0.55);
+      const mm = gsap.matchMedia();
+
+      mm.add('(min-width: 1081px)', () => {
+        const slot = root.current.querySelector('.focus__frame-slot');
+
+        // Measured against the slot, which never moves, so the numbers hold
+        // at any window size and can be recalculated on resize.
+        const coverScale = () => {
+          const r = slot.getBoundingClientRect();
+          return Math.max(window.innerWidth / r.width, window.innerHeight / r.height);
+        };
+
+        const toCentre = () => {
+          const r = slot.getBoundingClientRect();
+          return window.innerWidth / 2 - (r.left + r.width / 2);
+        };
+
+        gsap
+          .timeline({
+            scrollTrigger: {
+              trigger: root.current,
+              start: 'top top',
+              end: 'bottom bottom',
+              scrub: 1.3,
+              invalidateOnRefresh: true,
+            },
+            defaults: { ease: 'none' },
+          })
+          // Nothing happens for the first third: the footage simply fills
+          // the screen while you scroll.
+          .fromTo(
+            '.focus__frame',
+            { scale: coverScale, x: toCentre, borderRadius: 0 },
+            { scale: 1, x: 0, borderRadius: 28, duration: 0.34 },
+            0.36
+          )
+          .from('.focus__eyebrow', { autoAlpha: 0, y: 26, duration: 0.07 }, 0.68)
+          .from('.focus__line', { yPercent: 112, stagger: 0.04, duration: 0.09 }, 0.72)
+          .from('.focus__body', { autoAlpha: 0, y: 28, duration: 0.07 }, 0.8)
+          .from('.focus__note', { autoAlpha: 0, y: 20, duration: 0.07 }, 0.84)
+          // A moment settled in place before the section lets go.
+          .to({}, { duration: 0.12 }, 0.88);
+      });
+
+      mm.add('(max-width: 1080px)', () => {
+        gsap.from('.focus__copy > *', {
+          y: 36,
+          autoAlpha: 0,
+          duration: 0.9,
+          ease: 'power3.out',
+          stagger: 0.1,
+          scrollTrigger: { trigger: '.focus__copy', start: 'top 88%', once: true },
+        });
+      });
     }, root);
 
     return () => ctx.revert();
   }, []);
 
   return (
-    <section className={`focus focus--${side}`} id={id} ref={root}>
-      <div className="focus__inner">
-        <div className="focus__frame">
-          <video
-            ref={media}
-            className="focus__video"
-            autoPlay
-            muted
-            loop
-            playsInline
-            preload="none"
-            aria-hidden="true"
-          >
-            <source src={video} type="video/mp4" />
-          </video>
-        </div>
+    <section className="focus-wrap focus-wrap--panel" ref={root}>
+      <div className={`focus focus--${side}`} id={id}>
+        <div className="focus__inner">
+          <div className="focus__frame-slot">
+            <div className="focus__frame">
+              <video
+                ref={media}
+                className="focus__video"
+                autoPlay
+                muted
+                loop
+                playsInline
+                preload="none"
+                aria-hidden="true"
+              >
+                <source src={video} type="video/mp4" />
+              </video>
+            </div>
+          </div>
 
-        <div className="focus__copy">
-          <p className="focus__eyebrow">{eyebrow}</p>
+          <div className="focus__copy">
+            <p className="focus__eyebrow">{eyebrow}</p>
 
-          <h2 className="focus__title">
-            {lines.map((line) => (
-              <span className="focus__line-wrap" key={line}>
-                <span className="focus__line">{line}</span>
-              </span>
-            ))}
-          </h2>
+            <h2 className="focus__title">
+              {lines.map((line) => (
+                <span className="focus__line-wrap" key={line}>
+                  <span className="focus__line">{line}</span>
+                </span>
+              ))}
+            </h2>
 
-          <p className="focus__body">{body}</p>
-          {note ? <p className="focus__note">{note}</p> : null}
+            <p className="focus__body">{body}</p>
+            {note ? <p className="focus__note">{note}</p> : null}
+          </div>
         </div>
       </div>
     </section>
