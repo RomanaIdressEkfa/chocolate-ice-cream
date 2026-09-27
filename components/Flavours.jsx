@@ -2,9 +2,13 @@
 
 import { motion } from 'framer-motion';
 import { flavours } from '@/lib/flavours';
-import { easeOut, fadeUp, flyIn, maskLine, stagger, viewportOnce } from './motion';
+import SplitText from './SplitText';
+import useVelocitySkew from './useVelocitySkew';
+import { easeOut, fadeUp, flyIn, stagger, viewportOnce } from './motion';
 
 export default function Flavours() {
+  const skewY = useVelocitySkew();
+
   return (
     <section className="flavours" id="shop">
       <motion.div
@@ -18,16 +22,10 @@ export default function Flavours() {
           Our flavours
         </motion.p>
 
-        <h2 className="flavours__title">
-          <span className="flavours__line-wrap">
-            <motion.span className="flavours__line" variants={maskLine}>
-              Four ways to melt.
-            </motion.span>
-          </span>
-        </h2>
+        <SplitText className="flavours__title" lines={['Four ways to melt.']} />
       </motion.div>
 
-      <div className="flavours__track">
+      <motion.div className="flavours__track" style={{ skewY }}>
         {flavours.map(({ index, name, note, chunk }, i) => (
           // The slot never moves, so the viewport observer always sees it and
           // the card inside is free to start far off screen.
@@ -67,7 +65,7 @@ export default function Flavours() {
             </motion.article>
           </motion.div>
         ))}
-      </div>
+      </motion.div>
     </section>
   );
 }

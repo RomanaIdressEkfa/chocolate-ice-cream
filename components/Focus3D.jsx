@@ -24,7 +24,7 @@ function Panel({ id, eyebrow, lines, body, note, video, compact }) {
     offset: compact ? ['start end', 'end start'] : ['start start', 'end end'],
   });
 
-  const p = useSpring(scrollYProgress, { stiffness: 42, damping: 26, mass: 1.2 });
+  const p = useSpring(scrollYProgress, { stiffness: 60, damping: 22, mass: 0.9 });
 
   // A full turn that eases in, carries through, then settles.
   const rotateY = useTransform(

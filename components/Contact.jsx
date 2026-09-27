@@ -20,8 +20,8 @@ export default function Contact() {
           scrollTrigger: {
             trigger: root.current,
             start: 'top 82%',
-            end: 'top 18%',
-            scrub: 1.5,
+            end: 'top 45%',
+            scrub: 0.9,
           },
           defaults: { ease: 'none' },
         })
@@ -34,7 +34,7 @@ export default function Contact() {
         trigger: root.current,
         start: 'top bottom',
         end: 'bottom bottom',
-        scrub: 1.5,
+        scrub: 0.9,
       };
 
       gsap.fromTo(

@@ -3,6 +3,7 @@
 import { useRef } from 'react';
 import { motion } from 'framer-motion';
 import useAutoplay from './useAutoplay';
+import CountUp from './CountUp';
 import { easeOut, fadeUp, maskLine, stagger, viewportOnce } from './motion';
 
 const stats = [
@@ -108,7 +109,7 @@ export default function AboutPanels() {
           >
             {stats.map(({ value, label }) => (
               <motion.div className="craft__stat" key={value} variants={fadeUp}>
-                <span className="craft__num">{value}</span>
+                <CountUp value={value} className="craft__num" />
                 <span className="craft__label">{label}</span>
               </motion.div>
             ))}

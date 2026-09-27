@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import { motion } from 'framer-motion';
 import { usePathname } from 'next/navigation';
 import { LogoMark } from './Icons';
 
@@ -18,7 +19,12 @@ export default function Navbar() {
     href === '/' ? pathname === '/' : pathname.startsWith(href);
 
   return (
-    <header className="nav" data-intro="nav">
+    <motion.header
+      className="nav"
+      initial={{ y: -28, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.85, ease: [0.22, 1, 0.36, 1] }}
+    >
       <div className="nav__inner">
         <Link className="nav__brand" href="/">
           <LogoMark className="nav__brand-icon" />
@@ -44,6 +50,6 @@ export default function Navbar() {
           })}
         </nav>
       </div>
-    </header>
+    </motion.header>
   );
 }

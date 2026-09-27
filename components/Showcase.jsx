@@ -2,9 +2,12 @@
 
 import { useRef } from 'react';
 import Link from 'next/link';
-import { motion } from 'framer-motion';
+import { motion, useScroll, useSpring, useTransform } from 'framer-motion';
 import useAutoplay from './useAutoplay';
-import { easeOut, fadeUp, maskLine, stagger, viewportOnce } from './motion';
+import { LogoMark } from './Icons';
+import Magnetic from './Magnetic';
+import SplitText from './SplitText';
+import { easeOut, fadeUp, stagger, viewportOnce } from './motion';
 
 const items = [
   {
@@ -21,9 +24,18 @@ const items = [
   },
 ];
 
-function ShowcaseItem({ video, label, note, from, index }) {
+function ShowcaseItem({ video, label, note, from, index, progress }) {
   const media = useRef(null);
   useAutoplay(media);
+
+  // Each card turns a full circle as the section passes, the second a little
+  // behind the first so they do not move as one block.
+  const offset = index * 0.12;
+  const rotateY = useTransform(
+    progress,
+    [0.06 + offset, 0.5 + offset],
+    [0, 360]
+  );
 
   return (
     <motion.figure
@@ -33,19 +45,27 @@ function ShowcaseItem({ video, label, note, from, index }) {
       viewport={viewportOnce}
       transition={{
         type: 'spring',
-        stiffness: 42,
-        damping: 18,
-        mass: 1.2,
-        delay: index * 0.16,
-        opacity: { duration: 0.6, delay: index * 0.12 },
+        stiffness: 62,
+        damping: 16,
+        mass: 0.9,
+        delay: index * 0.08,
+        opacity: { duration: 0.4, delay: index * 0.08 },
       }}
       whileHover={{ y: -10, transition: { type: 'spring', stiffness: 170, damping: 20 } }}
     >
-      <div className="showcase__media">
-        <video ref={media} autoPlay muted loop playsInline preload="none" aria-hidden="true">
-          <source src={video} type="video/mp4" />
-        </video>
-        <div className="showcase__veil" aria-hidden="true" />
+      <div className="showcase__stage">
+        <motion.div className="showcase__media" style={{ rotateY }}>
+          <div className="showcase__face showcase__face--front">
+            <video ref={media} autoPlay muted loop playsInline preload="none" aria-hidden="true">
+              <source src={video} type="video/mp4" />
+            </video>
+            <div className="showcase__veil" aria-hidden="true" />
+          </div>
+
+          <div className="showcase__face showcase__face--back" aria-hidden="true">
+            <LogoMark className="showcase__mark" />
+          </div>
+        </motion.div>
       </div>
 
       <figcaption className="showcase__caption">
@@ -57,8 +77,17 @@ function ShowcaseItem({ video, label, note, from, index }) {
 }
 
 export default function Showcase() {
+  const root = useRef(null);
+
+  const { scrollYProgress } = useScroll({
+    target: root,
+    offset: ['start end', 'end start'],
+  });
+
+  const progress = useSpring(scrollYProgress, { stiffness: 80, damping: 22, mass: 0.8 });
+
   return (
-    <section className="showcase" id="kitchen">
+    <section className="showcase" id="kitchen" ref={root}>
       <div className="showcase__inner">
         <motion.div
           className="showcase__head"
@@ -71,13 +100,7 @@ export default function Showcase() {
             Straight from the kitchen
           </motion.p>
 
-          <h2 className="showcase__title">
-            <span className="showcase__line-wrap">
-              <motion.span className="showcase__line" variants={maskLine}>
-                Nothing here is rushed.
-              </motion.span>
-            </span>
-          </h2>
+          <SplitText className="showcase__title" lines={['Nothing here is rushed.']} />
 
           <motion.p className="showcase__intro" variants={fadeUp}>
             Two minutes in our kitchen explains the price better than we ever could.
@@ -87,7 +110,7 @@ export default function Showcase() {
 
         <div className="showcase__grid">
           {items.map((item, i) => (
-            <ShowcaseItem key={item.label} {...item} index={i} />
+            <ShowcaseItem key={item.label} {...item} index={i} progress={progress} />
           ))}
         </div>
 
@@ -98,9 +121,11 @@ export default function Showcase() {
           viewport={viewportOnce}
           transition={{ duration: 0.8, ease: easeOut, delay: 0.3 }}
         >
-          <Link className="showcase__cta" href="/shop">
-            Taste the difference
-          </Link>
+          <Magnetic>
+            <Link className="showcase__cta" href="/shop">
+              Taste the difference
+            </Link>
+          </Magnetic>
         </motion.div>
       </div>
     </section>

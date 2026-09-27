@@ -1,3 +1,6 @@
+'use client';
+
+import { motion } from 'framer-motion';
 import { FaDribbble, FaBehance, FaInstagram, FaFacebookF } from 'react-icons/fa6';
 
 const socials = [
@@ -13,7 +16,12 @@ const socials = [
 
 export default function BottomBar() {
   return (
-    <div className="bottom-bar" data-intro="bottom">
+    <motion.div
+      className="bottom-bar"
+      initial={{ y: 28, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.85, ease: [0.22, 1, 0.36, 1], delay: 0.25 }}
+    >
       <div className="bottom-bar__inner">
         <ul className="socials">
           {socials.map(({ label, href, Icon }) => (
@@ -29,6 +37,6 @@ export default function BottomBar() {
           Contact us
         </a>
       </div>
-    </div>
+    </motion.div>
   );
 }

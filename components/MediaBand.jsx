@@ -4,6 +4,7 @@ import { useRef } from 'react';
 import Link from 'next/link';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import useAutoplay from './useAutoplay';
+import Magnetic from './Magnetic';
 import { fadeUp, maskLine, stagger, viewportOnce } from './motion';
 
 /**
@@ -71,9 +72,11 @@ export default function MediaBand({ video, eyebrow, lines, body, cta }) {
 
         {cta ? (
           <motion.div variants={fadeUp}>
-            <Link className="band__cta" href={cta.href}>
-              {cta.label}
-            </Link>
+            <Magnetic>
+              <Link className="band__cta" href={cta.href}>
+                {cta.label}
+              </Link>
+            </Magnetic>
           </motion.div>
         ) : null}
       </motion.div>

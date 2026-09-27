@@ -3,7 +3,11 @@
 import { useRef } from 'react';
 import { motion } from 'framer-motion';
 import useAutoplay from './useAutoplay';
-import { fadeUp, flyIn, maskLine, stagger, viewportOnce } from './motion';
+import CountUp from './CountUp';
+import SplitText from './SplitText';
+import useVelocitySkew from './useVelocitySkew';
+import { motion as m } from 'framer-motion';
+import { fadeUp, flyIn, stagger, viewportOnce } from './motion';
 
 const proof = [
   {
@@ -28,6 +32,8 @@ const proof = [
 
 export default function Craft() {
   const media = useRef(null);
+  const skewY = useVelocitySkew();
+
   useAutoplay(media);
 
   return (
@@ -44,13 +50,7 @@ export default function Craft() {
             The craft
           </motion.p>
 
-          <h2 className="proof__title">
-            <span className="proof__line-wrap">
-              <motion.span className="proof__line" variants={maskLine}>
-                Made slowly, on purpose.
-              </motion.span>
-            </span>
-          </h2>
+          <SplitText className="proof__title" lines={['Made slowly, on purpose.']} />
 
           <motion.p className="proof__intro" variants={fadeUp}>
             No factory line, no shortcuts and no ingredient we cannot name. Here is
@@ -58,7 +58,7 @@ export default function Craft() {
           </motion.p>
         </motion.div>
 
-        <div className="proof__grid">
+        <m.div className="proof__grid" style={{ skewY }}>
           {proof.map(({ value, label, kind, src }, i) => (
             <motion.div
               className="card-slot"
@@ -83,13 +83,13 @@ export default function Craft() {
                 </div>
 
                 <div className="proof-card__body">
-                  <span className="proof-card__value">{value}</span>
+                  <CountUp value={value} className="proof-card__value" />
                   <span className="proof-card__label">{label}</span>
                 </div>
               </motion.article>
             </motion.div>
           ))}
-        </div>
+        </m.div>
       </div>
     </section>
   );

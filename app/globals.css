@@ -2209,10 +2209,42 @@ h1 {
     0 36px 80px rgba(0, 0, 0, 0.55);
 }
 
+.showcase__stage {
+  perspective: 1200px;
+}
+
+/*
+ * The turning element must not carry overflow of its own, or the browser
+ * flattens the 3D context and the card stops turning in depth.
+ */
 .showcase__media {
   position: relative;
   aspect-ratio: 4 / 3;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.showcase__face {
+  position: absolute;
+  inset: 0;
   overflow: hidden;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.showcase__face--back {
+  display: grid;
+  place-items: center;
+  transform: rotateY(180deg);
+  background:
+    radial-gradient(70% 60% at 50% 40%, rgba(154, 84, 40, 0.45) 0%, rgba(24, 11, 4, 0) 70%),
+    linear-gradient(160deg, #3a1c0c 0%, #180b04 100%);
+}
+
+.showcase__mark {
+  width: clamp(2.75rem, 5vw, 4rem);
+  height: auto;
+  color: rgba(255, 255, 255, 0.45);
 }
 
 .showcase__media video {
@@ -2480,4 +2512,45 @@ h1 {
   .focus3d__card {
     aspect-ratio: 4 / 3;
   }
+}
+
+/* ---------------- Word by word headlines ---------------- */
+
+.split__line {
+  display: block;
+}
+
+/*
+ * Each word gets its own mask so it can rise from behind the baseline
+ * without anything showing above the line.
+ */
+.split__word {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+  margin-right: 0.24em;
+  padding-bottom: 0.1em;
+}
+
+.split__inner {
+  display: inline-block;
+  will-change: transform;
+}
+
+/* ---------------- Scroll progress ---------------- */
+
+.scroll-progress {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 60;
+  height: 2px;
+  transform-origin: 0 50%;
+  background: linear-gradient(90deg, var(--caramel) 0%, #f6efe6 100%);
+  pointer-events: none;
+}
+
+/* The skewed rows need a sensible pivot. */
+.proof__grid,
+.flavours__track {
+  transform-origin: 50% 50%;
 }

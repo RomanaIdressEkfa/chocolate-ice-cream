@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from 'react';
 import Link from 'next/link';
+import { motion } from 'framer-motion';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -30,7 +31,13 @@ export default function SiteFooter() {
 
   return (
     <footer className="site-footer" ref={root}>
-      <div className="site-footer__inner">
+      <motion.div
+        className="site-footer__inner"
+        initial={{ y: 26, opacity: 0 }}
+        whileInView={{ y: 0, opacity: 1 }}
+        viewport={{ once: true, amount: 0.4 }}
+        transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+      >
         <span>&copy; {new Date().getFullYear()} Chocolate. All rights reserved.</span>
 
         <span className="site-footer__credit">
@@ -52,7 +59,7 @@ export default function SiteFooter() {
           <Link href="/about">About us</Link>
           <Link href="/contact">Contact</Link>
         </nav>
-      </div>
+      </motion.div>
     </footer>
   );
 }

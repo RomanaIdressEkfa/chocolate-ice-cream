@@ -20,12 +20,9 @@ export default function Hero() {
       const intro = gsap.timeline({ defaults: { ease: 'power3.out' } });
 
       intro
-        .from('[data-intro="nav"]', { y: -30, autoAlpha: 0, duration: 0.9 })
         .from('.hero__line', { yPercent: 115, duration: 1.1, stagger: 0.08 }, 0.15)
         .from('.hero__chunks--left', { x: -70, y: 40, autoAlpha: 0, duration: 1.3 }, 0.3)
-        .from('.hero__chunks--right', { x: 70, y: -40, autoAlpha: 0, duration: 1.3 }, 0.4)
-        .from('[data-intro="cue"]', { autoAlpha: 0, duration: 0.8, stagger: 0.1 }, 0.8)
-        .from('[data-intro="bottom"]', { y: 30, autoAlpha: 0, duration: 0.8 }, 0.85);
+        .from('.hero__chunks--right', { x: 70, y: -40, autoAlpha: 0, duration: 1.3 }, 0.4);
 
       // Sticky rather than pinned: no DOM is moved, so React stays happy and
       // the scroll distance is exactly the wrapper height.
@@ -35,7 +32,7 @@ export default function Hero() {
             trigger: root.current,
             start: 'top top',
             end: 'bottom bottom',
-            scrub: 1.3,
+            scrub: 0.9,
           },
           defaults: { ease: 'none' },
         })

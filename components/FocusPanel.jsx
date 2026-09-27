@@ -48,7 +48,7 @@ export default function FocusPanel({ id, eyebrow, lines, body, note, video, side
               trigger: root.current,
               start: 'top top',
               end: 'bottom bottom',
-              scrub: 1.3,
+              scrub: 0.9,
               invalidateOnRefresh: true,
             },
             defaults: { ease: 'none' },

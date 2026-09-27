@@ -2,11 +2,17 @@
 
 export const easeOut = [0.22, 1, 0.36, 1];
 
-export const viewportOnce = { once: true, amount: 0.2 };
+export const viewportOnce = {
+  once: true,
+  amount: 0.05,
+  // A positive bottom margin starts the reveal just before the section
+  // reaches the viewport, so it has finished by the time you are looking.
+  margin: '0px 0px 140px 0px',
+};
 
 export const fadeUp = {
   hidden: { y: 44, opacity: 0 },
-  show: { y: 0, opacity: 1, transition: { duration: 1.05, ease: easeOut } },
+  show: { y: 0, opacity: 1, transition: { duration: 0.72, ease: easeOut } },
 };
 
 export const stagger = (staggerChildren = 0.12, delayChildren = 0) => ({
@@ -16,7 +22,7 @@ export const stagger = (staggerChildren = 0.12, delayChildren = 0) => ({
 
 export const maskLine = {
   hidden: { y: '115%' },
-  show: { y: '0%', transition: { duration: 1.15, ease: easeOut } },
+  show: { y: '0%', transition: { duration: 0.82, ease: easeOut } },
 };
 
 /**
@@ -43,11 +49,11 @@ export const flyIn = (i) => {
       opacity: 1,
       transition: {
         type: 'spring',
-        stiffness: 40,
-        damping: 17,
-        mass: 1.2,
-        delay: i * 0.14,
-        opacity: { duration: 0.6, delay: i * 0.14 },
+        stiffness: 62,
+        damping: 16,
+        mass: 0.9,
+        delay: i * 0.07,
+        opacity: { duration: 0.4, delay: i * 0.07 },
       },
     },
   };

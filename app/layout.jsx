@@ -3,6 +3,7 @@ import Navbar from '@/components/Navbar';
 import BottomBar from '@/components/BottomBar';
 import SiteFooter from '@/components/SiteFooter';
 import SmoothScroll from '@/components/SmoothScroll';
+import ScrollProgress from '@/components/ScrollProgress';
 import './globals.css';
 
 const dmSans = DM_Sans({
@@ -29,6 +30,7 @@ export default function RootLayout({ children }) {
     <html lang="en" className={dmSans.variable}>
       <body>
         <SmoothScroll />
+        <ScrollProgress />
         <Navbar />
         <main>{children}</main>
         <SiteFooter />
